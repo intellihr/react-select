@@ -100,7 +100,7 @@ export default class Async extends Component {
 			});
 
 			return;
-	}
+		}
 
 		const callback = (error, data) => {
 			const options = data && data.options || [];
@@ -108,6 +108,8 @@ export default class Async extends Component {
 			if (cache) {
 				cache[inputValue] = options;
 			}
+
+			this._callback = null;
 
 			this.setState({
 				isLoading: false,
@@ -196,7 +198,7 @@ export default class Async extends Component {
 		return children({
 			...this.props,
 			...props,
-			isLoading,
+			isLoading: this.props.isLoading || isLoading,
 			onInputChange: this.onInputChange
 		});
 	}

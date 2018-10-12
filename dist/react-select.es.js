@@ -2137,6 +2137,8 @@ var Async = function (_Component) {
 					cache[inputValue] = options;
 				}
 
+				_this2._callback = null;
+
 				_this2.setState({
 					isLoading: false,
 					options: options
@@ -2244,7 +2246,7 @@ var Async = function (_Component) {
 			};
 
 			return children(_extends({}, this.props, props, {
-				isLoading: isLoading,
+				isLoading: this.props.isLoading || isLoading,
 				onInputChange: this.onInputChange
 			}));
 		}

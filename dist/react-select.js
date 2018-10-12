@@ -2142,14 +2142,10 @@ var Async = function (_Component) {
 					cache[inputValue] = options;
 				}
 
-				if (callback === _this2._callback) {
-					_this2._callback = null;
-
-					_this2.setState({
-						isLoading: false,
-						options: options
-					});
-				}
+				_this2.setState({
+					isLoading: false,
+					options: options
+				});
 			};
 
 			// Ignore all but the most recent request

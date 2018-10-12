@@ -100,7 +100,7 @@ export default class Async extends Component {
 			});
 
 			return;
-		}
+	}
 
 		const callback = (error, data) => {
 			const options = data && data.options || [];
@@ -109,14 +109,10 @@ export default class Async extends Component {
 				cache[inputValue] = options;
 			}
 
-			if (callback === this._callback) {
-				this._callback = null;
-
-				this.setState({
-					isLoading: false,
-					options
-				});
-			}
+			this.setState({
+				isLoading: false,
+				options
+			});
 		};
 
 		// Ignore all but the most recent request

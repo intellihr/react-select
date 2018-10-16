@@ -2139,7 +2139,7 @@ var Async = function (_Component) {
 					_this2._cache[input] = options;
 				}
 
-				if (data.input === _this2._inputValue) {
+				if (input === _this2._inputValue) {
 					_this2.setState({
 						isLoading: false,
 						options: options

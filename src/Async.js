@@ -87,16 +87,17 @@ export default class Async extends Component {
 	loadOptions (inputValue) {
 		const { loadOptions } = this.props;
 		const cache = this._cache;
+		this._inputValue = inputValue
 
 		if (
 			cache &&
-			Object.prototype.hasOwnProperty.call(cache, inputValue)
+			Object.prototype.hasOwnProperty.call(cache, this._inputValue)
 		) {
 			this._callback = null;
 
 			this.setState({
 				isLoading: false,
-				options: cache[inputValue]
+				options: cache[this._inputValue]
 			});
 
 			return;
@@ -104,23 +105,24 @@ export default class Async extends Component {
 
 		const callback = (error, data) => {
 			const options = data && data.options || [];
+			const input = data && data.input || this._inputValue
 
-			if (cache) {
-				cache[inputValue] = options;
+			if (this._cache) {
+				this._cache[input] = options;
 			}
 
-			this._callback = null;
-
-			this.setState({
-				isLoading: false,
-				options
-			});
+			if (data.input === this._inputValue) {
+				this.setState({
+					isLoading: false,
+					options
+				});
+			}
 		};
 
 		// Ignore all but the most recent request
 		this._callback = callback;
 
-		const promise = loadOptions(inputValue, callback);
+		const promise = loadOptions(this._inputValue, callback);
 		if (promise) {
 			promise.then(
 				(data) => callback(null, data),

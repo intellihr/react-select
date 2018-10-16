@@ -111,7 +111,7 @@ export default class Async extends Component {
 				this._cache[input] = options;
 			}
 
-			if (data.input === this._inputValue) {
+			if (input === this._inputValue) {
 				this.setState({
 					isLoading: false,
 					options
